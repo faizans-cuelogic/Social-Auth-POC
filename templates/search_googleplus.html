@@ -1,0 +1,17 @@
+<html>
+<body>
+<h3> Search Result </h3>
+{% for post in posts %}
+  Author : {{ post.actor }} <br/>
+  Date : {{ post.date }} <br/>
+  Post : {{ post.data }}<br/>
+  <br/>
+  <br/>
+{% endfor %}
+
+<a href="/home/"> Back to Search page </a>
+<p><a href="/logout">Logout</a>
+</p>
+
+</body>
+</html

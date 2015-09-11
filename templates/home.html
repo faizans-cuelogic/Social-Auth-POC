@@ -1,0 +1,13 @@
+<h1>Welcome {{ request.user }}</h1>
+
+<h3> Search twitter for results </h3>
+{{ request.session.demo }}
+<form action="/search/" method="get">
+<input type="text" name="keyword">
+<button> Search Twitter</button>
+</form>
+<form action="/search/googleplus/" method="get">
+<input type="text" name="keyword_google">
+<button> Search Google+</button>
+</form>
+<p><a href="/logout">Logout</a>

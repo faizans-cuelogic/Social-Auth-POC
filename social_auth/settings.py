@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# DEBUG = True
+
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+SOCIAL_AUTH_TWITTER_KEY = 'jnm77brvOZ0up6dSMWVDXBLTz'
+
+SOCIAL_AUTH_TWITTER_SECRET = '2SfpaoT1HupFaDoMO6r8iHDkCDQ8fA3ShmQJkgihexWdqZuvsV'
 
 # Application definition
 
@@ -37,7 +44,33 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'social.apps.django_app.default',
+
+    'social_auth_management',
 )
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = "754zufsc3i0hay"
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = "iU1gq1nnFecuUOR2"
+
+SOCIAL_AUTH_FACEBOOK_KEY = "991267737603917"
+
+SOCIAL_AUTH_FACEBOOK_SECRET = "99ac3c59d275a459b0e7d1f4e0e8ddf8"
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "39094139190-ies6ie3me8c7qhk82qie6vcvm4t5gq9q.apps.googleusercontent.com"
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "CVN-mGkVJwmsVfHkmCtW2YgU"
+
+SOCIAL_AUTH_GOOGLE_OAUTH_KEY = "39094139190-ies6ie3me8c7qhk82qie6vcvm4t5gq9q.apps.googleusercontent.com"
+
+SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = "CVN-mGkVJwmsVfHkmCtW2YgU"
+
+SOCIAL_AUTH_GOOGLE_PLUS_KEY = "39094139190-ies6ie3me8c7qhk82qie6vcvm4t5gq9q.apps.googleusercontent.com"
+
+SOCIAL_AUTH_GOOGLE_PLUS_SECRET = "CVN-mGkVJwmsVfHkmCtW2YgU"
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -48,14 +81,33 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
+
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenId',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GoogleOAuth',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.google.GooglePlusAuth',
+    'social.backends.yahoo.YahooOpenId',
+    'social.backends.linkedin.LinkedinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 
 ROOT_URLCONF = 'social_auth.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +115,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },

@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from social_auth_management.views import (
+    LoginView,
+    HomePageView,
+)
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^$', LoginView.as_view()),
+    url(r'^home/$', HomePageView.as_view()),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
 ]
